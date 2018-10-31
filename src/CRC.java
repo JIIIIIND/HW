@@ -42,7 +42,13 @@ public class CRC
         index = 0;
     }
 
-    public void ReadFile(String path)
+    public void startCRC()
+    {
+        ReadFile(this.getClass().getResource("").getPath() + "input.txt");
+        Operation();
+    }
+
+    private void ReadFile(String path)
     {
         try
         {
@@ -56,21 +62,21 @@ public class CRC
                 BitSet bit = new BitSet(8);
                 String binary = Integer.toBinaryString(character);
                 int evenParity = 0;
-
+                int startPos = 7-binary.length();
                 for(int i = 0; i < binary.length(); i++)
                 {
                     if(binary.charAt(i) == '1')
                     {
-                        bit.set(i+1,true);
+                        bit.set(i+startPos,true);
                         evenParity++;
                     }
                     else
-                        bit.set(i+1,false);
+                        bit.set(i+startPos,false);
                 }
                 if(evenParity%2 == 1)
-                    bit.set(0,true);
+                    bit.set(7,true);
                 else
-                    bit.set(0,false);
+                    bit.set(7,false);
 
                 bitList.add(bit);
             }
@@ -83,10 +89,9 @@ public class CRC
                 dataList.add(false);
 
             System.out.println(ListToBinary(dataList));
-            Operation();
         }
-        catch(FileNotFoundException e) {}
-        catch(IOException e) {}
+        catch(FileNotFoundException e) { System.out.println(e); }
+        catch(IOException e) { System.out.println(e); }
     }
 
     private void Operation()
@@ -95,9 +100,9 @@ public class CRC
         {
             XOR();
         }
-        System.out.println("완료?");
         String value = ListToBinary(resultList);
-        System.out.println(value);
+
+        //파일 저장
     }
 
     private boolean CheckData()

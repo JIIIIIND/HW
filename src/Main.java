@@ -8,7 +8,7 @@ public class Main {
 
         CRC crc = new CRC();
         //crc.ReadFile(crc.getClass().getResource("").getPath() + "input.txt");
-        crc.ReadFile("C:\\Users\\jinwo\\OneDrive\\문서\\HW\\src\\input.txt");
+        crc.startCRC();
     }
 
 }

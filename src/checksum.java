@@ -51,13 +51,13 @@ public class checksum
                 }
                 if(binary.length() < 7)
                 {
-                    for(int i = binary.length(); i < 7; i++)
+                    for(int i = binary.length(); i <= 7; i++)
                         binary = "0" + binary;
                 }
                 if(evenParity%2 == 1)
-                    binary = "1" + binary;
+                    binary = binary + "1";
                 else
-                    binary = "0" + binary;
+                    binary = binary + "0";
 
                 bitList.add(binary);
                 System.out.println(binary);
