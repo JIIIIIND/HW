@@ -14,10 +14,10 @@ public class checksum
         bitList = new ArrayList<>();
     }
 
-    public void StartChecksum(String path)
+    public void StartChecksum()
     {
-        ReadFile(path + "input.txt");
-        WriteFile(path+"output_checksum.txt");
+        ReadFile( "./src/input.txt");
+        WriteFile("./src/output_checksum.txt");
     }
 
     private void WriteFile(String path)
@@ -51,7 +51,7 @@ public class checksum
                 }
                 if(binary.length() < 7)
                 {
-                    for(int i = binary.length(); i <= 7; i++)
+                    for(int i = binary.length(); i < 7; i++)
                         binary = "0" + binary;
                 }
                 if(evenParity%2 == 1)
@@ -60,11 +60,12 @@ public class checksum
                     binary = binary + "0";
 
                 bitList.add(binary);
-                System.out.println(binary);
             }
 
             MergeString(bitList);
             result = ChecksumCalculate(bitList);
+            while(result.length() < 16)
+                result = "0" + result;
         }
         catch(FileNotFoundException e) {System.out.println("File Not Found");}
         catch(IOException e) {System.out.println("IOException");}
@@ -90,11 +91,14 @@ public class checksum
     private void MergeString(ArrayList<String> list)
     {
         int length = list.size();
-        for(int i = 0; i < length; i += 2)
+        if(length > 2)
         {
-            list.add(list.get(0)+list.get(1));
-            list.remove(0);
-            list.remove(0);
+            for(int i = 0; i < length; i += 2)
+            {
+                list.add(list.get(0)+list.get(1));
+                list.remove(0);
+                list.remove(0);
+            }
         }
     }
 

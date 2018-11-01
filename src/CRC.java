@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.BitSet;
 
@@ -42,9 +39,9 @@ public class CRC
         index = 0;
     }
 
-    public void startCRC()
+    public void StartCRC()
     {
-        ReadFile(this.getClass().getResource("").getPath() + "input.txt");
+        ReadFile( "./src/input.txt");
         Operation();
     }
 
@@ -88,7 +85,6 @@ public class CRC
             for(int i = 0; i < 16; i++)
                 dataList.add(false);
 
-            System.out.println(ListToBinary(dataList));
         }
         catch(FileNotFoundException e) { System.out.println(e); }
         catch(IOException e) { System.out.println(e); }
@@ -100,9 +96,20 @@ public class CRC
         {
             XOR();
         }
-        String value = ListToBinary(resultList);
 
-        //파일 저장
+        String value = ListToBinary(resultList);
+        WriteFile("./src/output_crc.txt",value);
+    }
+
+    private void WriteFile(String path, String value)
+    {
+        try
+        {
+            PrintWriter printWriter = new PrintWriter(path);
+            printWriter.print(value);
+            printWriter.close();
+        }
+        catch(IOException e) {System.out.println("IOException"); }
     }
 
     private boolean CheckData()
