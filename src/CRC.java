@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.BitSet;
 
-public class CRC
+public class crc
 {
     //11000000000000101
     ArrayList<Boolean> keyValue;
@@ -11,7 +11,7 @@ public class CRC
     ArrayList<Boolean> resultList;
     int index;
 
-    public CRC()
+    public crc()
     {
         resultList = new ArrayList<>();
         bitList = new ArrayList<>();

@@ -5,7 +5,7 @@ public class Main {
         checksum check = new checksum();
         check.StartChecksum();
 
-        CRC crc = new CRC();
+        crc crc = new crc();
         crc.StartCRC();
     }
 
